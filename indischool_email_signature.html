@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인디스쿨 이메일 서명 템플릿</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+    background: #f5f7fa;
+    padding: 30px;
+    min-height: 100vh;
+  }
+  .page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .page-title span {
+    color: #0057FF;
+  }
+
+  /* 미리보기 영역 */
+  .preview-area {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .preview-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  /* 실제 서명 스타일 (이메일에 들어가는 부분) */
+  .signature-wrapper {
+    display: inline-block;
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, sans-serif;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .sig-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #0057FF;
+    margin-bottom: 12px;
+  }
+  .sig-logo {
+    width: 120px;
+    min-width: 120px;
+  }
+  .sig-logo img {
+    width: 100%;
+    display: block;
+  }
+  .sig-divider-v {
+    width: 1px;
+    background: #ddd;
+    align-self: stretch;
+  }
+  .sig-info {
+    flex: 1;
+  }
+  .sig-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 2px;
+  }
+  .sig-title {
+    font-size: 12px;
+    color: #0057FF;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  .sig-dept {
+    font-size: 11px;
+    color: #777;
+  }
+  .sig-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 6px;
+  }
+  .sig-contact-item {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sig-title-item {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #0057FF !important;
+  }
+  .sig-contact-item .icon {
+    font-size: 11px;
+    color: #0057FF;
+    font-weight: bold;
+  }
+  .sig-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 11px;
+    color: #777;
+  }
+  .sig-bottom a {
+    color: #0057FF;
+    text-decoration: none;
+  }
+
+  /* 입력 폼 */
+  .form-area {
+    background: white;
+    border-radius: 12px;
+    padding: 24px 30px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .form-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .form-row.full { grid-column: 1 / -1; }
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+  }
+  input {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: #333;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  input:focus { border-color: #0057FF; }
+  input::placeholder { color: #bbb; }
+
+  /* 버튼 */
+  .btn-area {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .btn {
+    padding: 11px 28px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: #0057FF;
+    color: white;
+  }
+  .btn-primary:hover { background: #0046d0; }
+  .btn-copy {
+    background: #f0f4ff;
+    color: #0057FF;
+    border: 1.5px solid #0057FF;
+  }
+  .btn-copy:hover { background: #e0ecff; }
+
+  /* 복사 안내 */
+  .copy-guide {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    font-size: 13px;
+    color: #555;
+    line-height: 1.9;
+  }
+  .copy-guide h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .copy-guide ol {
+    padding-left: 20px;
+  }
+  .copy-guide li { margin-bottom: 2px; }
+  .copy-guide .highlight {
+    color: #0057FF;
+    font-weight: 600;
+  }
+
+  .toast {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    z-index: 1000;
+    white-space: nowrap;
+  }
+
+  /* 숨겨진 실제 서명 HTML (복사용) */
+  #hidden-sig { position: absolute; left: -9999px; top: 0; }
+</style>
+</head>
+<body>
+
+<p class="page-title">✉️ <span>인디스쿨</span> 이메일 서명 생성기</p>
+
+<!-- 미리보기 -->
+<div class="preview-area">
+  <div class="preview-label">📌 미리보기</div>
+  <div class="signature-wrapper" id="sig-preview">
+    <div class="sig-top">
+      <div class="sig-logo">
+        <img id="sig-logo-img" src="" alt="indischool logo">
+      </div>
+      <div class="sig-divider-v"></div>
+      <div class="sig-info">
+        <div class="sig-name" id="prev-name"></div>
+        <div class="sig-contacts">
+          <span class="sig-contact-item sig-title-item" id="prev-title-row">
+            <span id="prev-title"></span><span id="prev-dept-sep" style="display:none;"> | </span><span id="prev-dept"></span>
+          </span>
+          <span class="sig-contact-item"><span class="icon">T</span> <span id="prev-phone">010-0000-0000</span></span>
+          <span class="sig-contact-item"><span class="icon">@</span> <span id="prev-email">아이디@indischool.org</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="sig-bottom">
+      <span>사) 초등교사커뮤니티 인디스쿨</span>
+      <span>|</span>
+      <span>서울시 마포구 양화로 12길 8-5 세르보빌딩 2층</span>
+      <span>|</span>
+      <span><a href="http://www.indischool.com" target="_blank">www.indischool.com</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- 입력 폼 -->
+<div class="form-area">
+  <div class="form-title">✏️ 개인 정보 입력</div>
+  <div class="form-grid">
+    <div class="form-row">
+      <label for="input-name">이름 *</label>
+      <input type="text" id="input-name" placeholder="홍길동">
+    </div>
+    <div class="form-row">
+      <label for="input-title">직함 *</label>
+      <input type="text" id="input-title" placeholder="사무국장">
+    </div>
+    <div class="form-row">
+      <label for="input-dept">부서</label>
+      <input type="text" id="input-dept" placeholder="사무국">
+    </div>
+    <div class="form-row">
+      <label for="input-phone">전화번호</label>
+      <input type="text" id="input-phone" placeholder="02-0000-0000">
+    </div>
+    <div class="form-row full">
+      <label for="input-email">이메일 아이디 (@ 앞부분)</label>
+      <input type="text" id="input-email" placeholder="gildong (→ gildong@indischool.org)">
+    </div>
+  </div>
+  <div class="btn-area" style="margin-top:18px;">
+    <button class="btn btn-primary" onclick="updatePreview()">미리보기 업데이트</button>
+    <button class="btn btn-copy" onclick="copySignature()">서명 복사하기</button>
+  </div>
+</div>
+
+<!-- 복사 안내 -->
+<div class="copy-guide">
+  <h3>📋 Gmail 서명 설정 방법</h3>
+  <ol>
+    <li><span class="highlight">「서명 복사하기」</span> 버튼을 클릭합니다.</li>
+    <li>Gmail에서 <span class="highlight">설정(톱니바퀴) → 모든 설정 보기 → 서명</span>으로 이동합니다.</li>
+    <li>새 서명을 만들고, 서명 편집 창에 <span class="highlight">Ctrl+V (Mac: ⌘+V)</span>로 붙여넣습니다.</li>
+    <li>하단 <span class="highlight">「변경사항 저장」</span>을 클릭합니다.</li>
+  </ol>
+</div>
+
+<!-- 복사용 숨겨진 서명 -->
+<div id="hidden-sig"></div>
+<div class="toast" id="toast">✅ 서명이 클립보드에 복사되었습니다!</div>
+
+<script>
+// 로고 base64 주입
+const LOGO_BASE64 = "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";
+document.getElementById('sig-logo-img').src = "data:image/png;base64," + LOGO_BASE64;
+
+function getValues() {
+  return {
+    name: document.getElementById('input-name').value.trim(),
+    title: document.getElementById('input-title').value.trim(),
+    dept: document.getElementById('input-dept').value.trim(),
+    phone: document.getElementById('input-phone').value.trim() || '010-0000-0000',
+    email: (document.getElementById('input-email').value.trim() || '아이디') + '@indischool.org',
+  };
+}
+
+function updatePreview() {
+  const v = getValues();
+  document.getElementById('prev-name').textContent = v.name;
+
+  const titleRow = document.getElementById('prev-title-row');
+  const titleSpan = document.getElementById('prev-title');
+  const deptSpan = document.getElementById('prev-dept');
+  const deptSep = document.getElementById('prev-dept-sep');
+
+  titleSpan.textContent = v.title;
+  deptSpan.textContent = v.dept;
+
+  if (v.title || v.dept) { titleRow.style.display = ''; } else { titleRow.style.display = 'none'; }
+  deptSep.style.display = (v.title && v.dept) ? '' : 'none';
+
+  document.getElementById('prev-phone').textContent = v.phone;
+  document.getElementById('prev-email').textContent = v.email;
+}
+
+// 실시간 업데이트
+['input-name','input-title','input-dept','input-phone','input-email'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+
+function buildSignatureHTML() {
+  const v = getValues();
+  const titleDeptCell = (() => {
+    if (!v.title && !v.dept) return '';
+    const sep = (v.title && v.dept) ? ' | ' : '';
+    return `<tr><td style="font-size:13px;color:#0057FF;font-weight:600;padding:1px 0;">${v.title}${sep}${v.dept}</td></tr>`;
+  })();
+  return `
+<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Apple SD Gothic Neo','Malgun Gothic',Arial,sans-serif;font-size:13px;color:#333;line-height:1.6;">
+  <tr>
+    <td style="padding-bottom:12px;border-bottom:2px solid #0057FF;">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="width:120px;vertical-align:middle;padding-right:16px;">
+            <img src="data:image/png;base64,${LOGO_BASE64}" width="120" alt="indischool" style="display:block;">
+          </td>
+          <td style="width:1px;background:#ddd;vertical-align:stretch;padding:0 12px 0 0;">&nbsp;</td>
+          <td style="vertical-align:middle;padding-left:4px;">
+            <div style="font-size:16px;font-weight:700;color:#111;margin-bottom:6px;">${v.name}</div>
+            <table cellpadding="0" cellspacing="0" border="0">
+              ${titleDeptCell}
+              <tr><td style="font-size:12px;color:#555;padding:1px 0;"><span style="color:#0057FF;font-weight:bold;">T</span> ${v.phone}</td></tr>
+              <tr><td style="font-size:12px;color:#555;padding:1px 0;"><span style="color:#0057FF;font-weight:bold;">@</span> ${v.email}</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top:10px;font-size:11px;color:#777;">
+      사) 초등교사커뮤니티 인디스쿨 &nbsp;|&nbsp; 서울시 마포구 양화로 12길 8-5 세르보빌딩 2층 &nbsp;|&nbsp; <a href="http://www.indischool.com" style="color:#0057FF;text-decoration:none;">www.indischool.com</a>
+    </td>
+  </tr>
+</table>`;
+}
+
+function copySignature() {
+  const html = buildSignatureHTML();
+  // 클립보드에 HTML로 복사
+  const el = document.getElementById('hidden-sig');
+  el.innerHTML = html;
+
+  // ClipboardItem API 사용
+  try {
+    const blob = new Blob([html], { type: 'text/html' });
+    const item = new ClipboardItem({ 'text/html': blob });
+    navigator.clipboard.write([item]).then(() => {
+      showToast();
+    }).catch(() => {
+      fallbackCopy(el);
+    });
+  } catch(e) {
+    fallbackCopy(el);
+  }
+}
+
+function fallbackCopy(el) {
+  el.style.position = 'fixed';
+  el.style.left = '0';
+  el.style.top = '0';
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+  document.execCommand('copy');
+  sel.removeAllRanges();
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  showToast();
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 2500);
+}
+
+// 초기 로고 렌더링 (dept 숨기기)
+document.getElementById('prev-title-row').style.display = 'none';
+</script>
+</body>
+</html>
